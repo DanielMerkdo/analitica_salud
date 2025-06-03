@@ -1,6 +1,11 @@
 ######################################################
 # Función para graficar histograma, boxplot y qqplot #
 ######################################################
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import scipy.stats as stats 
+import matplotlib.pyplot as plt
 
 def crear_graficos(dataframe, columna):
 
