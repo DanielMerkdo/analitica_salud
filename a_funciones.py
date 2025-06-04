@@ -35,3 +35,13 @@ def crear_graficos(dataframe, columna):
     # Muestra la figura completa con los tres gráficos
     plt.tight_layout()  # Asegura que los gráficos no se solapen
     plt.show()
+
+def agregar_etiquetas_con_ratio(ax, columna):
+    total = len(columna)
+    for p in ax.patches:
+        conteo = p.get_height()
+        ratio = conteo / total
+        ax.annotate(f'{conteo}\n{ratio:.2%}',
+                    (p.get_x() + p.get_width() / 2., p.get_height()),
+                    ha='center', va='center',
+                    xytext=(0, 9), textcoords='offset points')
