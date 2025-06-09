@@ -11,17 +11,31 @@ logging.basicConfig(
 )
 
 def cargar_modelo(ruta_modelo="G:\\Mi unidad\\cod\\analitica_salud\\salidas\\best_rf_optuna.pkl"):
-    logging.info("Cargando el modelo desde disco.")
+    log_mes="Cargando el modelo"
+    logging.info(log_mes)
+    print(log_mes)
+
     modelo = joblib.load(ruta_modelo)
-    logging.info("Modelo cargado correctamente.")
+    log_mes="Modelo cargado correctamente."
+    logging.info(log_mes)
+    print(log_mes)
+
+
     return modelo
 
+
+
 def predecir_nuevos_datos(ruta_datos, ruta_salida):
-    logging.info("Leyendo nuevos datos para predecir.")
+    log_mes="Leyendo nuevos datos para predecir."
+    logging.info(log_mes)
+    print(log_mes)
+
     nuevos_datos = pd.read_csv(ruta_datos)
     modelo = cargar_modelo()
 
-    logging.info("Realizando predicciones.")
+    log_mes="Realizando predicciones."
+    logging.info(log_mes)
+    print(log_mes)
     probas = modelo.predict_proba(nuevos_datos)[:, 1]
 
     threshold = 0.5
@@ -29,7 +43,9 @@ def predecir_nuevos_datos(ruta_datos, ruta_salida):
     nuevos_datos['prediccion'] = predicciones
 
     nuevos_datos.to_csv(ruta_salida, index=False)
-    logging.info(f"Predicciones guardadas en: {ruta_salida}")
+    log_mes=f'Predicciones guardadas en: {ruta_salida}'
+    logging.info(log_mes)
+    print(log_mes)
 
 if __name__ == "__main__":
     ruta_entrada = "G:\\Mi unidad\\cod\\analitica_salud\\data\\datos_despliegue.csv"
