@@ -1,0 +1,13 @@
+2025-06-09 06:23:55,442 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 06:28:24,796 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 06:29:15,763 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 06:29:57,802 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 06:29:57,855 - INFO - Cargando el modelo desde disco.
+2025-06-09 06:30:13,683 - INFO - Modelo cargado correctamente.
+2025-06-09 06:30:13,683 - INFO - Realizando predicciones.
+2025-06-09 06:30:13,716 - INFO - Predicciones guardadas en: G:\Mi unidad\cod\analitica_salud\salidas\reco\resultados_despliegue.csv
+2025-06-09 06:38:23,080 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 06:38:23,102 - INFO - Cargando el modelo desde disco.
+2025-06-09 06:38:25,288 - INFO - Modelo cargado correctamente.
+2025-06-09 06:38:25,289 - INFO - Realizando predicciones.
+2025-06-09 06:38:25,356 - INFO - Predicciones guardadas en: G:\Mi unidad\cod\analitica_salud\salidas\reco\resultados_despliegue.csv
