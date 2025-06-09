@@ -21,3 +21,20 @@
 2025-06-09 06:55:37,723 - INFO - Modelo cargado correctamente.
 2025-06-09 06:55:37,723 - INFO - Realizando predicciones.
 2025-06-09 06:55:37,771 - INFO - Predicciones guardadas en: G:\Mi unidad\cod\analitica_salud\salidas\reco\resultados_despliegue.csv
+2025-06-09 06:58:51,697 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 06:58:51,761 - INFO - Cargando el modelo
+2025-06-09 06:59:14,114 - INFO - Modelo cargado correctamente.
+2025-06-09 06:59:14,115 - INFO - Realizando predicciones.
+2025-06-09 07:00:23,552 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 07:00:23,584 - INFO - Cargando el modelo
+2025-06-09 07:00:25,699 - INFO - Modelo cargado correctamente.
+2025-06-09 07:00:25,699 - INFO - Realizando predicciones.
+2025-06-09 07:00:25,750 - INFO - Predicciones guardadas en: G:\Mi unidad\cod\analitica_salud\salidas\reco\resultados_despliegue.csv
+2025-06-09 18:20:15,378 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 18:22:44,699 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 18:23:26,848 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 18:25:14,931 - INFO - Leyendo nuevos datos para predecir.
+2025-06-09 18:25:14,950 - INFO - Cargando el modelo
+2025-06-09 18:25:15,226 - INFO - Modelo cargado correctamente.
+2025-06-09 18:25:15,227 - INFO - Realizando predicciones.
+2025-06-09 18:33:27,576 - INFO - Leyendo nuevos datos para predecir.
