@@ -6,7 +6,7 @@ import pandas as pd
 
 from sklearn.preprocessing import MinMaxScaler, LabelEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
+
 
 # Configuración del log
 logging.basicConfig(
@@ -35,29 +35,15 @@ def predecir_nuevos_datos(ruta_datos, ruta_salida):
     logging.info(log_mes)
     print(log_mes)
 
-    nuevos_datos = pd.read_csv(ruta_datos)
+    nuevos_datos = pd.read_csv(ruta_datos,sep=';')
 
+    print("Columnas en el archivo CSV:", nuevos_datos.columns.tolist())
     ## Escalamiento variables numericas
     salud_escalado=nuevos_datos.copy()
-    # Columnas a escalar
-    columns_to_scale = ['age', 'height', 'weight', 'ap_hi', 'ap_lo']
-    # Crear el transformador
-    transformador = ColumnTransformer(
-        transformers=[('escalar', MinMaxScaler(), columns_to_scale)],
-        remainder='passthrough'
-    )
-    # Crear el pipeline para el escalamiento
-    pipeline = Pipeline(steps=[('escalamiento', transformador)])
-    # Aplicar el pipeline a saludfinal_df
-    salud_escalado1 = pipeline.fit_transform(salud_escalado)
-    # Reconstruir el DataFrame (puede cambiar el orden de columnas)
-    columnas_finales = columns_to_scale + [col for col in nuevos_datos.columns if col not in columns_to_scale]
-    salud_escalado_df = pd.DataFrame(salud_escalado1, columns=columnas_finales)
-    for col in columns_to_scale:
-        salud_escalado_df[col] = salud_escalado_df[col].astype(float)
 
+    pipeline = joblib.load('salidas/pipeline_escalado.pkl')
+    salud_cod= pipeline.transform(salud_escalado)
 
-    salud_cod=salud_escalado_df.copy()
 ##Dumificacion de variables categoricas
 
     data_2 = salud_cod.copy()
