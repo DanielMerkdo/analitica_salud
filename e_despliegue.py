@@ -2,11 +2,6 @@ import pandas as pd
 import joblib
 import logging
 import sys
-import pandas as pd
-
-from sklearn.preprocessing import MinMaxScaler, LabelEncoder, OneHotEncoder
-from sklearn.compose import ColumnTransformer
-
 
 # Configuración del log
 logging.basicConfig(
@@ -25,9 +20,7 @@ def cargar_modelo(ruta_modelo="G:\\Mi unidad\\cod\\analitica_salud\\salidas\\bes
     logging.info(log_mes)
     print(log_mes)
 
-
     return modelo
-
 
 
 def predecir_nuevos_datos(ruta_datos, ruta_salida):
@@ -35,74 +28,25 @@ def predecir_nuevos_datos(ruta_datos, ruta_salida):
     logging.info(log_mes)
     print(log_mes)
 
-    nuevos_datos = pd.read_csv(ruta_datos,sep=';')
-
-    print("Columnas en el archivo CSV:", nuevos_datos.columns.tolist())
-    ## Escalamiento variables numericas
-    salud_escalado=nuevos_datos.copy()
-
-    pipeline = joblib.load('salidas/pipeline_escalado.pkl')
-    salud_cod= pipeline.transform(salud_escalado)
-
-##Dumificacion de variables categoricas
-
-    data_2 = salud_cod.copy()
-
-    # Identificar variables categóricas
-    categorical_cols = data_2.select_dtypes(include=['object']).columns
-
-    # Crear un nuevo DataFrame para almacenar las variables transformadas
-    transformed_data = pd.DataFrame()
-
-    # Transformar variables categóricas con 2 valores usando LabelEncoder
-    label_encoder = LabelEncoder()
-
-    for col in categorical_cols:
-        if data_2[col].nunique() == 2:
-            # Aplicar LabelEncoder para variables con 2 categorías
-            transformed_data[col] = label_encoder.fit_transform(data_2[col])
-        else:
-            # Aplicar pd.get_dummies para variables con más de 2 categorías
-            dummies = pd.get_dummies(data_2[col], prefix=col, drop_first=True)
-            # Asegurarse de que las variables dummy sean numéricas (0 y 1)
-            dummies = dummies.astype(int)
-            transformed_data = pd.concat([transformed_data, dummies], axis=1)
-
-    # Añadir columnas numéricas no transformadas
-    numerical_cols = data_2.select_dtypes(include=['number']).columns
-    transformed_data = pd.concat([transformed_data, data_2[numerical_cols]], axis=1)
-
-    # Reordenar las columnas para asegurarnos de que cardio esté al final
-    #transformed_data = transformed_data[[col for col in transformed_data.columns if col != 'cardio'] + ['cardio']]
-
-    # Mostrar el DataFrame transformado
-    print("DataFrame transformado:")
-
-    salud_cod = transformed_data.copy()
-    salud_cod.head()
-
-    salud_modelado =salud_cod.copy()
-
-    ## Cargar modelo
-
+    nuevos_datos = pd.read_csv(ruta_datos)
     modelo = cargar_modelo()
-    
+
     log_mes="Realizando predicciones."
     logging.info(log_mes)
     print(log_mes)
-    probas = modelo.predict_proba(salud_modelado)[:, 1]
+    probas = modelo.predict_proba(nuevos_datos)[:, 1]
 
     threshold = 0.6
     predicciones = [1 if p > threshold else 0 for p in probas]
-    salud_modelado['prediccion'] = predicciones
+    nuevos_datos['prediccion'] = predicciones
 
-    salud_modelado.to_csv(ruta_salida, index=False)
+    nuevos_datos.to_csv(ruta_salida, index=False)
     log_mes=f'Predicciones guardadas en: {ruta_salida}'
     logging.info(log_mes)
     print(log_mes)
 
 if __name__ == "__main__":
-    ruta_entrada = "G:\\Mi unidad\\cod\\analitica_salud\\data\\datos_despliegue1.csv"
+    ruta_entrada = "G:\\Mi unidad\\cod\\analitica_salud\\data\\datos_despliegue.csv"
     ruta_salida = "G:\\Mi unidad\\cod\\analitica_salud\\salidas\\reco\\resultados_despliegue.csv"
     predecir_nuevos_datos(ruta_entrada, ruta_salida)
 
